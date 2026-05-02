@@ -15,4 +15,12 @@ app.use(express.urlencoded({extended: true, limit: "16kb"}));
 app.use(cookieParser());
 
 
+// routes import
+import instituteRouter from './routes/institute.routes.js';
+
+
+// routes declaration
+app.use("/api/v1/landingpage", instituteRouter)
+
+
 export { app };
