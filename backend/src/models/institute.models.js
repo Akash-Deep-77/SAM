@@ -49,11 +49,11 @@ const instituteSchema = new Schema(
         },
         instId:{
             type: String,
-            required: true
+            //required: true
         },
         instIdS:{
             type: String,
-            required: true
+            //required: true
         },
         faculty:[
             {
@@ -75,10 +75,37 @@ const instituteSchema = new Schema(
 )
 
 instituteSchema.pre("save", async function (next) {
-    if(!this.isModified("password")) return next();
+    if(!this.isModified("password")) return;
 
-    this.password = await bcrypt.hash(this.password, 10)
-    next()
+    this.password = await bcrypt.hash(this.password, 10);
+})
+
+instituteSchema.pre("save", async function (next) {
+    if (!this.isModified("name")) return;
+
+    function generateCodes(input) {
+    // Extract first letter of each word, skip small words like "&", "of", "the" etc.
+    const skipWords = new Set(["of", "and", "&", "the", "a", "an", "in", "at", "for"]);
+
+    const acronym = input
+        .split(" ")
+        .filter(word => !skipWords.has(word.toLowerCase()) && word.length > 0)
+        .map(word => word[0].toUpperCase())
+        .join("");
+
+    // Generate random numbers of given length
+    const randomDigits = (length) =>
+        Array.from({ length }, () => Math.floor(Math.random() * 10)).join("");
+
+    const code4 = `${acronym}${randomDigits(4)}`;
+    const code6 = `${acronym}${randomDigits(6)}`;
+
+    return { code4, code6 };
+    }
+
+    const { code4, code6 } = generateCodes(this.name);
+    this.instId = code4;
+    this.instIdS = code6;
 })
 
 instituteSchema.methods.isPasswordCorrect = async function(password){
