@@ -10,9 +10,11 @@ const generateAccessAndRefereshTokens = async(instituteId) => {
         const institute = await Institute.findById(instituteId);
         const accessToken = institute.generateAccessToken()
         const refreshToken = institute.generateRefreshToken()
+        // console.log("Generated refresh token:", refreshToken)
 
         institute.refreshToken = refreshToken
         await institute.save({ validateBeforeSave: false })
+        // console.log("Saved user refreshToken:", institute.refreshToken)
 
         return {accessToken, refreshToken}
 
@@ -70,7 +72,7 @@ const registerInstitute = asyncHandler( async (req ,res) => {
 
 
    return res.status(201).json(
-        new ApiResponse(200, createdInstitute, "Institute registered Successfully.")
+        new ApiResponse(201, createdInstitute, "Institute registered Successfully.")
    )
 })
 
@@ -191,6 +193,16 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     }
 })
 
+const getCurrentInstitute = asyncHandler(async(req, res) => {
+    return res
+    .status(200)
+    .json(new ApiResponse(
+        200,
+        req.institute,
+        "Institute fetched successfully"
+    ))
+})
+
 
 
 
@@ -198,5 +210,6 @@ export {
     registerInstitute,
     loginInstitute,
     logoutInstitute,
-    refreshAccessToken 
+    refreshAccessToken,
+    getCurrentInstitute 
  }

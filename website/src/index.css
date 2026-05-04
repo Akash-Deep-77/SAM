@@ -1,0 +1,227 @@
+/* ── SAM Design System ── */
+:root {
+  --bg-base:       #0f1117;
+  --bg-surface:    #171b26;
+  --bg-elevated:   #1e2335;
+  --bg-card:       #242840;
+
+  --green:         #3ecf6e;
+  --green-dim:     #2aa854;
+  --green-glow:    rgba(62,207,110,0.15);
+
+  --purple:        #a78bfa;
+  --purple-dim:    #7c5ce0;
+  --purple-glow:   rgba(167,139,250,0.15);
+
+  --text-primary:  #f0f2ff;
+  --text-secondary:#8b92b5;
+  --text-muted:    #555d80;
+
+  --border:        rgba(255,255,255,0.07);
+  --border-active: rgba(62,207,110,0.4);
+
+  --radius-sm:     6px;
+  --radius-md:     10px;
+  --radius-lg:     16px;
+
+  --font-mono:     'Space Mono', monospace;
+  --font-body:     'DM Sans', sans-serif;
+
+  --transition:    all 0.2s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--bg-card); border-radius: 3px; }
+
+/* ── Shared Form Styles ── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.form-group input,
+.form-group select {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: var(--transition);
+  width: 100%;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px var(--green-glow);
+}
+
+.form-group input::placeholder { color: var(--text-muted); }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--green);
+  color: #0f1117;
+}
+.btn-primary:hover { background: var(--green-dim); transform: translateY(-1px); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+.btn-secondary:hover { border-color: var(--text-secondary); color: var(--text-primary); }
+
+.btn-danger {
+  background: transparent;
+  color: #ff6b6b;
+  border: 1px solid rgba(255,107,107,0.3);
+}
+.btn-danger:hover { background: rgba(255,107,107,0.1); }
+
+.btn-purple {
+  background: var(--purple-dim);
+  color: #fff;
+}
+.btn-purple:hover { background: var(--purple); transform: translateY(-1px); }
+
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* ── Error / Success ── */
+.alert {
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+}
+.alert-error { background: rgba(255,107,107,0.1); color: #ff6b6b; border: 1px solid rgba(255,107,107,0.2); }
+.alert-success { background: var(--green-glow); color: var(--green); border: 1px solid var(--border-active); }
+
+/* ── Modal Overlay ── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.15s ease;
+}
+
+.modal {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  width: 100%;
+  max-width: 480px;
+  animation: slideUp 0.2s ease;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.modal-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 20px;
+  padding: 4px;
+  transition: var(--transition);
+}
+.modal-close:hover { color: var(--text-primary); }
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+/* ── Page header ── */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.page-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.page-tagline {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--green);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+/* ── Loading Spinner ── */
+.spinner {
+  width: 20px; height: 20px;
+  border: 2px solid var(--border);
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin   { to { transform: rotate(360deg); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

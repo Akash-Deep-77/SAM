@@ -32,6 +32,11 @@ const facultySchema = new schema(
             lowercase: true,
             match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address']
         },
+        status: {
+            type: String,
+            enum: ['Pending', 'Approved', 'Rejected'],
+            default: 'Pending'
+        },
         subjects: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Subject'
