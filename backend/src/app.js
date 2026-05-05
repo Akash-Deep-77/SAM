@@ -17,10 +17,16 @@ app.use(cookieParser());
 
 // routes import
 import instituteRouter from './routes/institute.routes.js';
-
+import facultyRouter from './routes/faculty.routes.js';
+import studentRouter from './routes/student.routes.js';
+import sessionRouter from './routes/session.routes.js';
+import attendanceRouter from './routes/attendance.routes.js';
 
 // routes declaration
-app.use("/api/v1/landingpage", instituteRouter)
-
+app.use("/api/v1/landingpage", instituteRouter);
+app.use("/api/v1/faculty", facultyRouter);
+app.use("/api/v1/student", studentRouter);
+app.use("/api/v1/session", sessionRouter);
+app.use("/api/v1/attendance", attendanceRouter);
 
 export { app };
