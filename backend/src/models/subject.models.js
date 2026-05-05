@@ -1,6 +1,6 @@
 import mongoose, {Schema} from "mongoose";
 
-const subjectSchema = new schema( 
+const subjectSchema = new Schema( 
     {
         subjectName: {
             type: String,

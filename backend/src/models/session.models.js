@@ -1,6 +1,6 @@
 import mongoose, {Schema} from "mongoose";
 
-const sessionSchema = new schema( 
+const sessionSchema = new Schema( 
     {
         facultyStarted: {
             type: mongoose.Schema.Types.ObjectId,

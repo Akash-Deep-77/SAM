@@ -1,6 +1,6 @@
 import mongoose, {Schema} from "mongoose";
 
-const clasSchema = new schema( 
+const clasSchema = new Schema( 
     {
         year: {
             type: Number,

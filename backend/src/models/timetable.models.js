@@ -1,6 +1,6 @@
 import mongoose, {Schema} from "mongoose";
 
-const timetableSchema = new schema( 
+const timetableSchema = new Schema( 
     {
         class: {
             type: mongoose.Schema.Types.ObjectId,
